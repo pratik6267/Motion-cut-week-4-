@@ -1,0 +1,60 @@
+import random
+
+def game_intro():
+    print("Welcome to Text Adventure Game!")
+    print("Your goal is to survive the jungle by making smart decisions.")
+    print("Choose your path wisely. Good luck!")
+
+def main_menu():
+    print("\nThe Sun is setting, and you have to make a choice:")
+    print("1. Venture deeper into the jungle to find food.")
+    print("2. Light a fire to keep wild animals away.")
+    print("3. Try to signal for help using your cell phone.")
+    return input("Enter your choice: ")
+
+def validate_input(choice):
+    if choice not in ["1", "2", "3"]:
+        print("\nInvalid input! Please enter 1, 2, or 3.")
+        return False
+    return True
+
+def handle_choice(choice):
+    if choice == "1":
+        print("\nYou decide to venture deeper into the jungle.")
+        if random.randint(1, 3) == 1:
+            print("Unfortunately, you got lost and couldn't find any food.")
+            print("As a result, you died of hunger.")
+            return False
+        else:
+            print("Luckily, you found some edible fruits and survived the night.")
+            return True
+
+    elif choice == "2":
+        print("\nYou decide to light a fire to keep wild animals away.")
+        if random.randint(1, 3) == 1:
+            print("The fire attracted too many wild animals, and you got eaten.")
+            return False
+        else:
+            print("You successfully kept the wild animals away, and you survived the night.")
+            return True
+
+    elif choice == "3":
+        print("\nYou try to signal for help using your cell phone.")
+        if random.randint(1, 3) == 1:
+            print("Your cell phone is too weak to transmit signals. You survived the night.")
+            return True
+        else:
+            print("Someone spotted your signal and sent help. You were rescued.")
+            return True
+
+def play_game():
+    while True:
+        game_intro()
+        choice = main_menu()
+        while not validate_input(choice):
+            choice = main_menu()
+        if not handle_choice(choice):
+            break
+
+if __name__ == "__main__":
+    play_game()
